@@ -1,0 +1,1 @@
+ mongoimport --jsonArray --db sultr --collection countries --file /home/fixtures/countries.json

@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import '/node_modules/flag-icons/css/flag-icons.min.css';
+@import 'vue3-q-tel-input/dist/vue3-q-tel-input.esm.css';
+
+// Font variables
+$font-family: 'Roboto', sans-serif;
+
+// General
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  color: $main;
+  font-family: $font-family;
+  font-size: 18px;
+}
+
+#q-app {
+  background-color: $accent;
+}
+
+.q-page {
+  background-color: white;
+}
+
+// Typography
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.15em;
+}
+
+// Buttons
+.q-btn {
+  text-transform: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  height: 64px;
+
+  &:before {
+    box-shadow: 0 5px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  &.cta {
+    background-color: $cta;
+    color: $main !important;
+  }
+
+  &.disabled,
+  &[disabled] {
+    background-color: $disabled-bg;
+    color: $disabled-text !important;
+    opacity: 1 !important;
+  }
+
+  .q-icon {
+    font-size: 24px;
+
+    &.on-right {
+      margin-left: 0;
+    }
+    &.on-left {
+      margin-right: 0;
+    }
+  }
+
+  &.icon {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    min-height: 0;
+
+    &:before {
+      box-shadow: none;
+    }
+  }
+
+  &.link {
+    padding: 0 16px;
+    height: auto;
+    font-weight: 400;
+    color: $accent;
+
+    &:before {
+      box-shadow: none;
+    }
+
+    .q-icon {
+      font-size: 18px;
+    }
+  }
+}
+
+// Forms
+
+.q-field {
+  font-size: 18px;
+
+  .q-field__control {
+    padding: 4px 20px;
+    border-radius: 10px;
+    height: 64px;
+    box-shadow: 0 5px 0 rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    background-color: #fafaf6;
+  }
+
+  .q-field__bottom {
+    font-size: 14px;
+    padding-top: 12px;
+  }
+
+  &.q-field--outlined {
+    .q-field__control:before {
+      border-color: #fafaf6;
+    }
+  }
+
+  .q-field__label {
+    font-size: 18px;
+    color: $placeholder;
+  }
+}
+
+// Stepper
+
+.full-screen-stepper {
+  background-color: $accent;
+  min-height: 100%;
+}
+
+.q-stepper {
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+
+  .q-stepper__header--border {
+    border-bottom: none;
+  }
+
+  .q-stepper__step-inner {
+    padding: 40px;
+  }
+
+  &.signup {
+    .q-stepper__header {
+      display: none !important;
+    }
+  }
+}
+
+.q-header {
+  padding: 40px;
+  background: transparent;
+  color: $main;
+
+  .q-toolbar {
+    padding: 0;
+  }
+
+  .logo {
+    width: 147px;
+    height: 25px;
+  }
+}
+
+.q-page {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.landing-header {
+  padding: 32px 32px 32px 40px;
+}
+
+.hero {
+  flex: 0 1 auto;
+  padding: 0 40px 40px;
+  p {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.15em;
+  }
+}
+
+.text-accent {
+  color: $accent;
+}
+
+.hero-image {
+  height: 100%;
+  width: 100%;
+  flex: 1 1 auto;
+  overflow: hidden;
+  background-image: url('src/assets/images/hero-map.png');
+  background-size: cover;
+  background-position: center center;
+}
+
+// Cards
+.q-card {
+  border-radius: 10px;
+
+  .q-card__section {
+    padding: 20px;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  &.info {
+    background-color: #FBFBF5;
+  }
+
+  &.important {
+    background-color: #DDECFE;
+  }
+}
+
+.q-drawer {
+  padding: 20px;
+}

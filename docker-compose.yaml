@@ -1,0 +1,23 @@
+version: "3.3"
+services:
+  business_app:
+    build: business-app/
+    image: "sultr-quasar-business-app"
+    ports:
+      - 4000:8080
+    restart: on-failure
+
+  api:
+    build: api/
+    image: "sultr-go-api"
+    ports:
+      - 4001:8080
+    restart: on-failure
+
+  mongo:
+    build: mongo/
+    image: "sultr-mongo"
+    hostname: sultr-mongo
+    ports:
+      - 4002:27017
+    restart: on-failure

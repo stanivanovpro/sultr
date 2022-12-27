@@ -1,0 +1,23 @@
+[
+  {
+    "name": "am",
+    "phonePrefix": "+375",
+    "cities": [
+      {
+        "name": "am.yerevan"
+      }
+    ]
+  },
+  {
+    "name": "ge",
+    "phonePrefix": "+995",
+    "cities": [
+      {
+        "name": "ge.tbilisi"
+      },
+      {
+        "name": "ge.batumi"
+      }
+    ]
+  }
+]
