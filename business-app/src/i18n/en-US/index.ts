@@ -34,14 +34,14 @@ export default {
     },
   },
   countries: {
-    armenia: 'Armenia',
-    georgia: 'Georgia',
+    am: 'Armenia',
+    ge: 'Georgia',
   },
   cities: {
-    armenia: {
+    am: {
       yerevan: 'Yerevan',
     },
-    georgia: {
+    ge: {
       tbilisi: 'Tbilisi',
       batumi: 'Batumi',
     },
