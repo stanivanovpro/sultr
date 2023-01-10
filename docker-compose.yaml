@@ -1,22 +1,39 @@
 version: "3.3"
 services:
   business_app:
-    build: business-app/
-    image: "sultr-quasar-business-app"
+    container_name: sultr-business-app
+    build:
+      context: ./business-app
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./business-app:/app
+      - /app/node_modules
+    image: sultr-business-app:1.0.0
     ports:
-      - 4000:8080
+      - 4000:4000
     restart: on-failure
 
   api:
-    build: api/
-    image: "sultr-go-api"
+    container_name: sultr-api
+    build:
+      context: ./api
+      args:
+        app_env: ${APP_ENV:-development}
+#    volumes:
+#      - ./api:/api
+    image: sultr-api:1.0.0
     ports:
       - 4001:8080
     restart: on-failure
 
   mongo:
-    build: mongo/
-    image: "sultr-mongo"
+    container_name: sultr-mongo
+    build:
+      context: ./mongo
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./mongo/db:/data/db
+    image: sultr-mongo:1.0.0
     hostname: sultr-mongo
     ports:
       - 4002:27017

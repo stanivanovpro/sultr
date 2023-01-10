@@ -1,3 +1,0 @@
-steps:
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ["builds", "submit", "business-app", "--config=business-app/cloudbuild-trigger.yaml"]

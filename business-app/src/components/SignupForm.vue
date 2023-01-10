@@ -269,8 +269,8 @@ export default {
     const { t } = useI18n({ useScope: 'global' });
 
     const formState = reactive(<SignupFormState>(<unknown>{
-      country: 'georgia',
-      city: 'georgia.tbilisi',
+      country: 'ge',
+      city: 'ge.tbilisi',
       businessType: 'barber',
       companyTitle: 'Cool Barbers',
       firstName: 'Stanislav',
