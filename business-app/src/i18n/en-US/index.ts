@@ -24,11 +24,11 @@ export default {
         error: 'Please choose country',
       },
       city_field: {
-        label: 'City/Town',
+        label: 'City/town',
         error: 'Please choose city/town',
       },
       business_type_field: {
-        label: 'Business Type',
+        label: 'Business type',
         error: 'Please choose business type',
       },
     },
