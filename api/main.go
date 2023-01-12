@@ -70,13 +70,6 @@ func GetCountries(ctx *gin.Context) {
 		log.Fatalln(err)
 	}
 	ctx.JSON(http.StatusOK, countries)
-
-	defer func(client *mongo.Client, ctx context.Context) {
-		err := client.Disconnect(ctx)
-		if err != nil {
-			log.Fatalln(err)
-		}
-	}(db.Client(), ctx)
 }
 
 func GetBusinessTypes(ctx *gin.Context) {
