@@ -22,7 +22,7 @@ type MongoConfig struct {
 }
 
 var mongoConfig = MongoConfig{
-	uri:      GetRequiredEnv("MONGO_URI"),
+	uri:      "mongodb+srv://sultr.drbew.mongodb.net/?retryWrites=true&w=majority",
 	username: GetEnv("MONGO_USER", ""),
 	password: GetEnv("MONGO_PASSWORD", ""),
 	database: GetEnv("MONGO_DATABASE", "sultr"),
