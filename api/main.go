@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
@@ -9,22 +10,37 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
 	"net/http"
+	"os"
+	"time"
 )
 
-var (
-	mongoURI = "mongodb://mongo:27017"
-)
-
-type country struct {
-	ID          string `json:"id"`
-	Name        string `json:"name"`
-	PhonePrefix string `json:"phone_prefix"`
-	Cities      []city `json:"cities"`
+type MongoConfig struct {
+	uri      string
+	username string
+	password string
+	database string
 }
 
-type city struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+var mongoConfig = MongoConfig{
+	uri:      GetRequiredEnv("MONGO_URI"),
+	username: GetEnv("MONGO_USER", ""),
+	password: GetEnv("MONGO_PASSWORD", ""),
+	database: GetEnv("MONGO_DATABASE", "sultr"),
+}
+
+func GetEnv(key string, fallback string) string {
+	if value, ok := os.LookupEnv(key); ok {
+		return value
+	}
+	return fallback
+}
+
+func GetRequiredEnv(key string) string {
+	if value, ok := os.LookupEnv(key); ok {
+		return value
+	}
+	log.Fatalln(fmt.Sprintf("Required env variable %s is missing.", key))
+	return ""
 }
 
 type businessType struct {
@@ -49,7 +65,7 @@ func GetCountries(ctx *gin.Context) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	var countries = []bson.M{}
+	var countries []bson.M
 	if err = cursor.All(ctx, &countries); err != nil {
 		log.Fatalln(err)
 	}
@@ -68,20 +84,32 @@ func GetBusinessTypes(ctx *gin.Context) {
 }
 
 func ConnectToDatabase() *mongo.Database {
-	client, err := mongo.NewClient(options.Client().ApplyURI(mongoURI))
-	if err != nil {
-		log.Fatalln(err)
+	serverAPIOptions := options.ServerAPI(options.ServerAPIVersion1)
+	clientOptions := options.Client().
+		ApplyURI(mongoConfig.uri).
+		SetServerAPIOptions(serverAPIOptions)
+
+	if mongoConfig.username != "" {
+		credential := options.Credential{
+			Username: mongoConfig.username,
+		}
+		if mongoConfig.password != "" {
+			credential.Password = mongoConfig.password
+		}
+		clientOptions.SetAuth(credential)
 	}
-	ctx := context.Background()
-	err = client.Connect(ctx)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	client, err := mongo.Connect(ctx, clientOptions)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	return client.Database("sultr")
+	return client.Database(mongoConfig.database)
 }
 
 func main() {
+
 	// Configure and start router
 	router := gin.Default()
 	router.Use(cors.New(cors.Config{

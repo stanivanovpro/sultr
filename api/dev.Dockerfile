@@ -1,26 +1,13 @@
-ARG GO_VERSION=1.18
+FROM golang:1.19-alpine
 
-FROM golang:${GO_VERSION}-alpine AS builder
+WORKDIR /app
 
-RUN apk update && apk add alpine-sdk git && rm -rf /var/cache/apk/*
+COPY go.mod go.sum /app/
 
-RUN mkdir -p /api
-WORKDIR /api
+RUN go mod download && go mod verify
 
-COPY go.mod .
-COPY go.sum .
-RUN go mod download
+RUN go install github.com/cosmtrek/air@latest
 
-COPY . .
-RUN go build -o /app main.go
+COPY ./ /app/
 
-FROM alpine:latest
-
-RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
-
-RUN mkdir -p /api
-WORKDIR /api
-COPY --from=builder /app .
-
-EXPOSE 8080
-ENTRYPOINT ["./app"]
+CMD "air"

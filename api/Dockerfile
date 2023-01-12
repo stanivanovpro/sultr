@@ -1,6 +1,4 @@
-ARG GO_VERSION=1.18
-
-FROM golang:${GO_VERSION}-alpine AS builder
+FROM golang:1.19-alpine AS builder
 
 RUN apk update && apk add alpine-sdk git && rm -rf /var/cache/apk/*
 

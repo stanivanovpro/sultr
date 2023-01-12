@@ -15,12 +15,14 @@ services:
 
   api:
     container_name: sultr-api
+    env_file: ./api/dev.env
     build:
       context: ./api
+      dockerfile: dev.Dockerfile
       args:
         app_env: ${APP_ENV:-development}
-#    volumes:
-#      - ./api:/api
+    volumes:
+      - ./api:/api
     image: sultr-api:1.0.0
     ports:
       - 4001:8080
