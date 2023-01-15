@@ -57,6 +57,9 @@ var businessTypes = []businessType{
 	{
 		ID: "beauty_salon",
 	},
+	{
+		ID: "smth",
+	},
 }
 
 func GetCountries(ctx *gin.Context) {
