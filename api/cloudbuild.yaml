@@ -5,7 +5,7 @@ steps:
     args: ['push', "$_IMAGE"]
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
-    args: ['run', 'deploy', 'sultr-api', '--image', "$_IMAGE", '--region', "${LOCATION}"]
+    args: ['run', 'deploy', 'sultr-api', '--image', "$_IMAGE", '--region', "europe-west-1"]
 images:
   - "$_IMAGE"
 substitutions:
