@@ -111,6 +111,7 @@ func main() {
 			"http://localhost:4000",
 			"http://localhost:8080",
 			"http://sultr-business-app:8080",
+			"https://sultr-business-app-uf4lnilpqq-ew.a.run.app/",
 		},
 	}))
 	router.GET("countries", GetCountries)
