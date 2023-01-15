@@ -1,13 +1,13 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', "$_IMAGE", './api']
+    args: ['build', '-t', "$_IMAGE", './business-app']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', "$_IMAGE"]
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
-    args: ['run', 'deploy', 'sultr-api', '--image', "$_IMAGE", '--region', "$_REGION"]
+    args: ['run', 'deploy', 'sultr-business-app', '--image', "$_IMAGE", '--region', "$_REGION"]
 images:
   - "$_IMAGE"
 substitutions:
-  _IMAGE: "gcr.io/${PROJECT_ID}/sultr-api-${SHORT_SHA}"
+  _IMAGE: "gcr.io/${PROJECT_ID}/sultr-business-app-${SHORT_SHA}"
   _REGION: "europe-west1"
