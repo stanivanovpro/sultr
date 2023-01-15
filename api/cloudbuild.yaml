@@ -7,6 +7,6 @@ steps:
     entrypoint: gcloud
     args: ['run', 'deploy', 'sultr-api', '--image', '$_IMAGE', '--region', '$LOCATION']
 images:
-  - gcr.io/PROJECT_ID/IMAGE
+  - '$_IMAGE'
 substitutions:
   _IMAGE: 'gcr.io/$PROJECT_ID/sultr-api-$SHORT_SHA'
