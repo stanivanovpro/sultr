@@ -60,6 +60,8 @@ var businessTypes = []businessType{
 }
 
 func GetCountries(ctx *gin.Context) {
+	ctx.JSON(http.StatusOK, mongoConfig)
+	return
 	db := ConnectToDatabase()
 	cursor, err := db.Collection("countries").Find(ctx, bson.M{})
 	if err != nil {
@@ -81,6 +83,7 @@ func ConnectToDatabase() *mongo.Database {
 	clientOptions := options.Client().
 		ApplyURI(mongoConfig.uri).
 		SetServerAPIOptions(serverAPIOptions)
+
 	log.Println(mongoConfig, mongoConfig.uri, mongoConfig.database, mongoConfig.username, mongoConfig.password)
 	if mongoConfig.username != "" {
 		credential := options.Credential{
