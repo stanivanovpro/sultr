@@ -57,14 +57,9 @@ var businessTypes = []businessType{
 	{
 		ID: "beauty_salon",
 	},
-	{
-		ID: "smth",
-	},
 }
 
 func GetCountries(ctx *gin.Context) {
-	ctx.JSON(http.StatusOK, mongoConfig)
-	return
 	db := ConnectToDatabase()
 	cursor, err := db.Collection("countries").Find(ctx, bson.M{})
 	if err != nil {
