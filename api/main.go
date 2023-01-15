@@ -106,14 +106,7 @@ func main() {
 
 	// Configure and start router
 	router := gin.Default()
-	router.Use(cors.New(cors.Config{
-		AllowOrigins: []string{
-			"http://localhost:4000",
-			"http://localhost:8080",
-			"http://sultr-business-app:8080",
-			"https://sultr-business-app-uf4lnilpqq-ew.a.run.app/",
-		},
-	}))
+	router.Use(cors.Default())
 	router.GET("countries", GetCountries)
 	router.GET("business-types", GetBusinessTypes)
 	err := router.Run("0.0.0.0:8080")
