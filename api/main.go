@@ -81,7 +81,7 @@ func ConnectToDatabase() *mongo.Database {
 	clientOptions := options.Client().
 		ApplyURI(mongoConfig.uri).
 		SetServerAPIOptions(serverAPIOptions)
-
+	log.Println(mongoConfig, mongoConfig.uri, mongoConfig.database, mongoConfig.username, mongoConfig.password)
 	if mongoConfig.username != "" {
 		credential := options.Credential{
 			Username: mongoConfig.username,
