@@ -109,6 +109,7 @@ func main() {
 	router.Use(cors.New(cors.Config{
 		AllowOrigins: []string{
 			"http://localhost:4000",
+			"http://localhost:8080",
 			"http://sultr-business-app:8080",
 		},
 	}))
